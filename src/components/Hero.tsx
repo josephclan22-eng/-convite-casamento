@@ -144,7 +144,7 @@ export default function Hero() {
             </span>
             <span className="block w-10 md:w-16 h-px bg-gold/40" />
           </div>
-          <div className="inline-flex items-center gap-3 px-6 py-3 border border-gold/30 bg-cream/70 backdrop-blur-sm">
+          <div className="inline-flex flex-col items-center gap-1 px-6 py-3 border border-gold/30 bg-cream/70 backdrop-blur-sm">
             <span className="font-garamond text-muted text-sm md:text-base">A Cerimônia será no dia</span>
             <span className="font-sans text-ink text-base md:text-lg tracking-[0.15em] font-medium">
               06 - 09 - 2026
