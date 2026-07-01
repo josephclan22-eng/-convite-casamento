@@ -56,10 +56,10 @@ export default function Story() {
           {milestones.map((item, i) => (
             <div
               key={i}
-              className="relative pl-12 md:pl-20 border-l-2 border-gold/40 cursor-pointer group"
+              className="relative pl-10 sm:pl-12 md:pl-20 border-l-2 border-gold/40 cursor-pointer group"
               onClick={() => setExpanded(expanded === i ? null : i)}
             >
-              <div className="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gold/60 bg-cream flex items-center justify-center text-sm group-hover:border-gold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gold/20">
+              <div className="absolute left-0 top-0 -translate-x-1/2 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-gold/60 bg-cream flex items-center justify-center text-[10px] sm:text-sm group-hover:border-gold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gold/20">
                 {item.icon}
               </div>
 
@@ -67,7 +67,7 @@ export default function Story() {
                 <span className="font-sans text-xs text-gold-dark tracking-[0.2em] uppercase">
                   {item.date}
                 </span>
-                <p className="font-garamond text-ink-light text-lg md:text-xl leading-relaxed mt-3 italic transition-all duration-300">
+                <p className="font-garamond text-ink-light text-base sm:text-lg md:text-xl leading-relaxed mt-2 sm:mt-3 italic transition-all duration-300">
                   "{item.text}"
                 </p>
                 {expanded === i && (

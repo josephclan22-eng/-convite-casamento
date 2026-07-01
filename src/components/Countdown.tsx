@@ -6,12 +6,12 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
 
   return (
     <div className="flex flex-col items-center group">
-      <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center border border-gold/20 bg-cream/70 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/50 group-hover:shadow-lg group-hover:shadow-gold/5">
-        <div className="flex gap-1 md:gap-1.5">
+      <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 flex items-center justify-center border border-gold/20 bg-cream/70 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/50 group-hover:shadow-lg group-hover:shadow-gold/5">
+        <div className="flex gap-0.5 sm:gap-1 md:gap-1.5">
           {digits.map((d, i) => (
             <span
               key={`${d}-${i}`}
-              className="font-serif text-3xl md:text-5xl font-bold text-ink tabular-nums countdown-digit"
+              className="font-serif text-xl sm:text-3xl md:text-5xl font-bold text-ink tabular-nums countdown-digit"
               style={{
                 animation: value !== 0 ? `countdown-tick 0.3s ease-out ${i * 0.05}s` : undefined,
               }}
@@ -21,7 +21,7 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
           ))}
         </div>
       </div>
-      <span className="font-sans text-[10px] md:text-xs text-muted tracking-[0.25em] uppercase mt-3">
+      <span className="font-sans text-[8px] sm:text-[10px] md:text-xs text-muted tracking-[0.2em] sm:tracking-[0.25em] uppercase mt-2 sm:mt-3">
         {label}
       </span>
     </div>
@@ -56,13 +56,13 @@ export default function Countdown() {
           Para o grande dia
         </h2>
 
-        <div className="mt-12 flex justify-center gap-3 md:gap-6">
+        <div className="mt-8 sm:mt-12 flex justify-center gap-1 sm:gap-3 md:gap-6">
           <CountdownBlock value={time.days} label="Dias" />
-          <span className="font-serif text-3xl md:text-4xl text-gold/50 self-start mt-1 md:mt-3">:</span>
+          <span className="font-serif text-xl sm:text-3xl md:text-4xl text-gold/50 self-start mt-0.5 sm:mt-1 md:mt-3">:</span>
           <CountdownBlock value={time.hours} label="Horas" />
-          <span className="font-serif text-3xl md:text-4xl text-gold/50 self-start mt-1 md:mt-3">:</span>
+          <span className="font-serif text-xl sm:text-3xl md:text-4xl text-gold/50 self-start mt-0.5 sm:mt-1 md:mt-3">:</span>
           <CountdownBlock value={time.minutes} label="Minutos" />
-          <span className="font-serif text-3xl md:text-4xl text-gold/50 self-start mt-1 md:mt-3">:</span>
+          <span className="font-serif text-xl sm:text-3xl md:text-4xl text-gold/50 self-start mt-0.5 sm:mt-1 md:mt-3">:</span>
           <CountdownBlock value={time.seconds} label="Segundos" />
         </div>
 
