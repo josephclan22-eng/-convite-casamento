@@ -3,52 +3,28 @@ import { useEffect, useRef, useState } from "react"
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const started = useRef(false)
+  const ready = useRef(false)
 
   useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const strategies = [
-      () => audio.play(),
-      () => {
-        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
-        if (ctx.state === "suspended") return ctx.resume()
-        return Promise.resolve()
-      },
-    ]
-
-    ;(async () => {
-      for (const s of strategies) {
-        try {
-          await s()
-        } catch {}
-      }
-    })()
-
-    function start(e: Event) {
-      if (started.current) return
-      started.current = true
-      e.preventDefault()
-      e.stopPropagation()
+    function play() {
+      if (ready.current) return
       const a = audioRef.current
-      if (a && a.paused) {
-        a.play()
-          .then(() => setPlaying(true))
-          .catch(() => {})
-      }
+      if (!a) return
+      ready.current = true
+      a.play().then(() => setPlaying(true)).catch(() => {})
     }
 
-    document.addEventListener("click", start, { once: true })
-    document.addEventListener("touchstart", start, { once: true, passive: false })
-    document.addEventListener("keydown", start, { once: true })
-    document.addEventListener("scroll", start, { once: true })
+    const a = audioRef.current
+    if (a) a.play().then(() => setPlaying(true)).catch(() => {})
+
+    for (const e of ["click", "touchstart", "touchend", "keydown", "scroll"]) {
+      document.addEventListener(e, play, { once: true })
+    }
 
     return () => {
-      document.removeEventListener("click", start)
-      document.removeEventListener("touchstart", start)
-      document.removeEventListener("keydown", start)
-      document.removeEventListener("scroll", start)
+      for (const e of ["click", "touchstart", "touchend", "keydown", "scroll"]) {
+        document.removeEventListener(e, play)
+      }
     }
   }, [])
 
@@ -57,26 +33,13 @@ export default function MusicPlayer() {
     e.stopPropagation()
     const a = audioRef.current
     if (!a) return
-
-    if (playing) {
-      a.pause()
-      setPlaying(false)
-    } else {
-      a.play()
-        .then(() => setPlaying(true))
-        .catch(() => {})
-    }
+    if (playing) { a.pause(); setPlaying(false) }
+    else { a.play().then(() => setPlaying(true)).catch(() => {}) }
   }
 
   return (
     <>
-      <audio
-        ref={audioRef}
-        src="/music/trem-bala.webm"
-        preload="auto"
-        loop
-        playsInline
-      />
+      <audio ref={audioRef} src="/music/trem-bala.mp3" preload="auto" loop playsInline />
       <button
         type="button"
         onClick={toggle}
