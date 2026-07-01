@@ -19,32 +19,30 @@ export default function Rsvp() {
   })
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!form.name.trim() || form.confirmed === null) return
 
     setLoading(true)
 
-    setTimeout(() => {
-      addGuest({
-        name: form.name,
-        email: form.email || "-",
-        phone: form.phone || "-",
-        confirmed: form.confirmed ? "Sim" : "Não",
-        companions: form.confirmed ? Number(form.companions) : 0,
-        companionNames: form.confirmed ? form.companionNames : "",
-        foodRestrictions: form.confirmed ? form.foodRestrictions : "",
-        message: form.message || "-",
-      })
+    await addGuest({
+      name: form.name,
+      email: form.email || "-",
+      phone: form.phone || "-",
+      confirmed: form.confirmed ? "Sim" : "Não",
+      companions: form.confirmed ? Number(form.companions) : 0,
+      companionNames: form.confirmed ? form.companionNames : "",
+      foodRestrictions: form.confirmed ? form.foodRestrictions : "",
+      message: form.message || "-",
+    })
 
-      setSubmitted(true)
-      setConfirmed(form.confirmed)
-      setLoading(false)
-    }, 800)
+    setSubmitted(true)
+    setConfirmed(form.confirmed)
+    setLoading(false)
   }
 
-  const handleDownload = () => {
-    downloadGuestList()
+  const handleDownload = async () => {
+    await downloadGuestList()
   }
 
   const reset = () => {
