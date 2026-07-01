@@ -108,7 +108,16 @@ export async function downloadGuestList() {
 
   const wb = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(wb, ws, "Convidados")
-  XLSX.writeFile(wb, `Lista-Convidados-Elivaldo&Sara-${new Date().toISOString().split("T")[0]}.xlsx`)
+  const bin = XLSX.write(wb, { bookType: "xlsx", type: "array" })
+  const blob = new Blob([bin], { type: "application/octet-stream" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = `Lista-Convidados-${new Date().toISOString().split("T")[0]}.xlsx`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 
   return true
 }
