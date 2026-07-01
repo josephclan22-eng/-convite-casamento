@@ -29,7 +29,11 @@ export async function addGuest(guest: Guest) {
       companion_names: guest.companionNames || "",
       food_restrictions: guest.foodRestrictions || "",
       message: guest.message || "-",
-    }, { returning: "minimal" })
+    })
+    if (error?.message?.includes("row-level security")) {
+      // INSERT succeeded but post-INSERT SELECT failed (anon can't read back)
+      return
+    }
     if (error) {
       console.error("Supabase insert error:", error)
       localGuests.push({ ...guest, created_at: new Date().toISOString() })
