@@ -78,8 +78,17 @@ export default function Details() {
             </svg>
             <span className="font-sans text-[10px] sm:text-xs text-muted tracking-[0.15em] uppercase">Localização</span>
           </div>
-          <p className="font-garamond text-ink-light text-base sm:text-lg mb-1">Igreja Matriz São Sebastião</p>
-          <p className="font-garamond text-muted text-sm sm:text-base italic">Salão Villa Verde — Traje: Esporte Fino</p>
+          <a
+            href="https://maps.app.goo.gl/N3JZWwFED7yjsbVy5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block group"
+          >
+            <p className="font-garamond text-ink-light text-base sm:text-lg mb-1 group-hover:text-gold-dark transition-colors">
+              Igreja Matriz São Sebastião
+            </p>
+            <p className="font-garamond text-muted text-sm sm:text-base italic">Salão Villa Verde — Traje: Esporte Fino</p>
+          </a>
         </div>
 
         <DecorativeDivider variant="diamond" />
