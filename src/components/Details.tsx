@@ -15,7 +15,7 @@ const schedule = [
   {
     time: "17:30",
     label: "Cocktail",
-    desc: "Salão Villa Verde",
+    desc: "Espaço Absolutto",
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2v4M6 8l6 4 6-4M6 12l6 4 6-4M6 16l6 4 6-4" />
@@ -26,7 +26,7 @@ const schedule = [
   {
     time: "18:30",
     label: "Jantar & Festa",
-    desc: "Salão Villa Verde",
+    desc: "Espaço Absolutto",
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="10" />
@@ -85,9 +85,9 @@ export default function Details() {
             className="block group"
           >
             <p className="font-garamond text-ink-light text-base sm:text-lg mb-1 group-hover:text-gold-dark transition-colors">
-              Igreja Matriz São Sebastião
+              Espaço Absolutto
             </p>
-            <p className="font-garamond text-muted text-sm sm:text-base italic">Salão Villa Verde — Traje: Esporte Fino</p>
+            <p className="font-garamond text-muted text-sm sm:text-base italic">Festas e Eventos — Jardin Ingá — Traje: Esporte Fino</p>
           </a>
         </div>
 
