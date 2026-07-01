@@ -41,11 +41,6 @@ export default function Rsvp() {
     setLoading(false)
   }
 
-  const handleDownload = async () => {
-    const ok = await downloadGuestList()
-    if (!ok) alert("Nenhum convidado cadastrado para download.")
-  }
-
   const reset = () => {
     setSubmitted(false)
     setConfirmed(null)
@@ -79,16 +74,6 @@ export default function Rsvp() {
               : "Compreendemos perfeitamente. Sentiremos sua falta, mas o carinho permanece!"}
           </p>
 
-          <button
-            onClick={handleDownload}
-            className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gold/30 text-gold-dark font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 hover:bg-gold hover:text-cream hover:border-gold"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            Baixar Planilha de Convidados
-          </button>
-
           <div className="mt-12 flex flex-col items-center gap-4">
             <a
               href="#"
@@ -103,6 +88,13 @@ export default function Rsvp() {
     )
   }
 
+  const isAdmin = typeof window !== "undefined" && window.location.search === "?admin=1"
+
+  const handleDownload = async () => {
+    const ok = await downloadGuestList()
+    if (!ok) alert("Nenhum convidado cadastrado para download.")
+  }
+
   return (
     <section id="rsvp" className="relative py-24 md:py-32 px-6" ref={ref}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -113,6 +105,23 @@ export default function Rsvp() {
       <div className="scroll-reveal max-w-xl mx-auto text-center relative z-10">
         <DecorativeDivider variant="hearts" />
 
+        {isAdmin && (
+          <div className="mb-8 p-4 border-2 border-gold/40 rounded">
+            <p className="font-sans text-xs text-gold-dark tracking-[0.15em] uppercase mb-3">
+              Painel Administrativo
+            </p>
+            <button
+              onClick={handleDownload}
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gold/30 text-gold-dark font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 hover:bg-gold hover:text-cream hover:border-gold"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+              Baixar Planilha de Convidados
+            </button>
+          </div>
+        )}
+
         <p className="font-garamond text-gold-dark text-xl italic mb-3">
           Sua presença é o nosso presente
         </p>
@@ -122,18 +131,6 @@ export default function Rsvp() {
         <p className="font-garamond text-ink-light text-lg leading-relaxed mb-8 max-w-lg mx-auto">
           Por favor, confirme até <strong className="text-gold-dark">15 de agosto de 2026</strong>
         </p>
-
-        <div className="mb-8 text-center">
-          <button
-            onClick={handleDownload}
-            className="inline-flex items-center gap-2 px-6 py-3 border border-gold/20 text-gold-dark font-sans text-[10px] tracking-[0.2em] uppercase transition-all duration-300 hover:bg-gold/10"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            Baixar Planilha de Convidados
-          </button>
-        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 text-left animate-fade-in-up">
           <div>
