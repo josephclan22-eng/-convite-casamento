@@ -137,21 +137,21 @@ export default function Hero() {
         </div>
 
         <div className="animate-fade-in-up mt-6" style={{ animationDelay: "0.5s" }}>
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <span className="block w-8 md:w-12 h-px bg-gold/40" />
-            <span className="font-garamond text-gold-dark text-sm md:text-base tracking-[0.3em] uppercase">
-              Save the date
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <span className="block w-10 md:w-16 h-px bg-gold/40" />
+            <span className="font-garamond text-gold-dark text-lg md:text-xl tracking-[0.3em] uppercase font-medium">
+              Reserve esta data
             </span>
-            <span className="block w-8 md:w-12 h-px bg-gold/40" />
+            <span className="block w-10 md:w-16 h-px bg-gold/40" />
           </div>
-          <OrnamentBottom />
-        </div>
-
-        <div className="animate-fade-in-up mt-8" style={{ animationDelay: "0.7s" }}>
-          <div className="inline-flex items-center gap-4 px-6 py-3 border border-gold/30 bg-cream/70 backdrop-blur-sm">
-            <span className="font-sans text-muted text-xs md:text-sm tracking-[0.2em] uppercase font-medium">
-              06 · 09 · 2026
+          <div className="inline-flex items-center gap-3 px-6 py-3 border border-gold/30 bg-cream/70 backdrop-blur-sm">
+            <span className="font-garamond text-muted text-sm md:text-base">A Cerimônia será no dia</span>
+            <span className="font-sans text-ink text-base md:text-lg tracking-[0.15em] font-medium">
+              06 - 09 - 2026
             </span>
+          </div>
+          <div className="mt-6">
+            <OrnamentBottom />
           </div>
         </div>
 
