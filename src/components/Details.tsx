@@ -5,7 +5,7 @@ const schedule = [
   {
     time: "16:00",
     label: "Cerimônia Religiosa",
-    desc: "Igreja Matriz São Sebastião",
+    desc: "Espaço Absolutto",
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -14,7 +14,7 @@ const schedule = [
   },
   {
     time: "17:30",
-    label: "Cocktail",
+    label: "Recepção dos Noivos",
     desc: "Espaço Absolutto",
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
