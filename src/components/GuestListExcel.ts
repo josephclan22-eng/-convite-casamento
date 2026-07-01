@@ -44,29 +44,31 @@ export async function addGuest(guest: Guest) {
 }
 
 export async function downloadGuestList() {
-  let data: GuestRow[]
+  try {
+    let data: GuestRow[]
 
-  if (supabase) {
-    const { data: rows, error } = await supabase
-      .from("guests")
-      .select("*")
-      .order("created_at", { ascending: true })
+    if (supabase) {
+      const { data: rows, error } = await supabase
+        .from("guests")
+        .select("*")
+        .order("created_at", { ascending: true })
 
-    if (error) {
-      console.error("Supabase fetch error:", error)
-      data = [...localGuests]
+      if (error) {
+        console.error("Supabase fetch error:", error)
+        data = [...localGuests]
+      } else {
+        data = rows || []
+      }
     } else {
-      data = rows || []
+      data = [...localGuests]
     }
-  } else {
-    data = [...localGuests]
-  }
 
-  if (data.length === 0) return false
+    if (data.length === 0) return false
 
-  const { default: XLSX } = await import("xlsx")
+    const mod = await import("xlsx")
+    const XLSX = mod.default ?? mod
 
-  const rows = data.map((g, i) => ({
+    const rows = data.map((g, i) => ({
     "#": i + 1,
     Nome: g.name,
     Email: g.email,
@@ -120,6 +122,10 @@ export async function downloadGuestList() {
   URL.revokeObjectURL(url)
 
   return true
+  } catch (e) {
+    console.error("Download error:", e)
+    return false
+  }
 }
 
 export async function getGuestCount() {
