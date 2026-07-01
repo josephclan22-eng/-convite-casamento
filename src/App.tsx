@@ -9,6 +9,7 @@ import Rsvp from "./components/Rsvp"
 import Footer from "./components/Footer"
 import ToastAlert from "./components/ToastAlert"
 import FloatingParticles from "./components/FloatingParticles"
+import MusicPlayer from "./components/MusicPlayer"
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
       </div>
 
       <ToastAlert />
+      <MusicPlayer />
     </main>
   )
 }

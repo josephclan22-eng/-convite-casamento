@@ -9,7 +9,7 @@ interface Particle {
   rotation: number
   rotationSpeed: number
   opacity: number
-  type: "heart" | "ring" | "petal" | "diamond" | "clarinet" | "piano"
+  type: "heart" | "ring" | "petal" | "diamond" | "clarinet" | "piano" | "treble" | "bass"
 }
 
 function drawHeart(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) {
@@ -64,47 +64,48 @@ function drawClarinet(ctx: CanvasRenderingContext2D, x: number, y: number, size:
   ctx.save()
   ctx.translate(x, y)
   ctx.rotate((rotation * Math.PI) / 180)
-  const s = size / 20
+  const s = size / 28
   ctx.scale(s, s)
   ctx.lineWidth = 1.5
-  ctx.strokeStyle = "rgba(201, 168, 76, 0.8)"
-  ctx.fillStyle = "rgba(201, 168, 76, 0.4)"
+  const col = "rgba(201, 168, 76, 0.75)"
 
-  // Body
+  // Body tube
+  ctx.strokeStyle = col
+  ctx.fillStyle = "rgba(201, 168, 76, 0.3)"
   ctx.beginPath()
-  ctx.moveTo(-2, -10)
-  ctx.lineTo(2, -10)
-  ctx.lineTo(2, 10)
-  ctx.lineTo(-2, 10)
+  ctx.moveTo(-2, -14)
+  ctx.quadraticCurveTo(-3, -7, -2.5, 6)
+  ctx.lineTo(2.5, 6)
+  ctx.quadraticCurveTo(3, -7, 2, -14)
   ctx.closePath()
   ctx.fill()
   ctx.stroke()
 
   // Bell (flared end)
   ctx.beginPath()
-  ctx.moveTo(-2, 10)
-  ctx.quadraticCurveTo(-6, 12, -7, 16)
-  ctx.lineTo(7, 16)
-  ctx.quadraticCurveTo(6, 12, 2, 10)
+  ctx.moveTo(-2.5, 6)
+  ctx.quadraticCurveTo(-5, 8, -7, 14)
+  ctx.lineTo(7, 14)
+  ctx.quadraticCurveTo(5, 8, 2.5, 6)
   ctx.closePath()
   ctx.fill()
   ctx.stroke()
 
   // Mouthpiece
   ctx.beginPath()
-  ctx.moveTo(-0.5, -10)
-  ctx.lineTo(0.5, -10)
-  ctx.lineTo(1.5, -16)
-  ctx.lineTo(-1.5, -16)
+  ctx.moveTo(-1.5, -14)
+  ctx.lineTo(1.5, -14)
+  ctx.lineTo(2, -18)
+  ctx.lineTo(-0.5, -18)
   ctx.closePath()
   ctx.fill()
   ctx.stroke()
 
-  // Keys (dots along body)
-  for (let i = -6; i <= 6; i += 4) {
+  // Keys
+  ctx.fillStyle = "rgba(201, 168, 76, 0.6)"
+  for (let i = -10; i <= 2; i += 4) {
     ctx.beginPath()
-    ctx.arc(3, i, 0.8, 0, Math.PI * 2)
-    ctx.fillStyle = "rgba(201, 168, 76, 0.7)"
+    ctx.arc(3.5, i, 1, 0, Math.PI * 2)
     ctx.fill()
     ctx.stroke()
   }
@@ -119,26 +120,23 @@ function drawPiano(ctx: CanvasRenderingContext2D, x: number, y: number, size: nu
   const s = size / 24
   ctx.scale(s, s)
 
-  // Piano body
-  ctx.fillStyle = "rgba(201, 168, 76, 0.35)"
-  ctx.strokeStyle = "rgba(201, 168, 76, 0.7)"
+  ctx.fillStyle = "rgba(201, 168, 76, 0.25)"
+  ctx.strokeStyle = "rgba(201, 168, 76, 0.65)"
   ctx.lineWidth = 1.2
   ctx.beginPath()
   ctx.roundRect(-12, -8, 24, 16, 2)
   ctx.fill()
   ctx.stroke()
 
-  // White keys
-  ctx.fillStyle = "rgba(248, 245, 240, 0.5)"
   const keyW = 24 / 14
+  ctx.fillStyle = "rgba(248, 245, 240, 0.4)"
   for (let k = 0; k < 14; k++) {
     const kx = -12 + k * keyW
     ctx.fillRect(kx, -6, keyW - 0.3, 10)
     ctx.strokeRect(kx, -6, keyW - 0.3, 10)
   }
 
-  // Black keys
-  ctx.fillStyle = "rgba(30, 30, 46, 0.5)"
+  ctx.fillStyle = "rgba(30, 30, 46, 0.4)"
   const blackKeys = [0, 1, 3, 4, 5, 7, 8, 10, 11, 12]
   for (const bk of blackKeys) {
     const kx = -12 + (bk + 1) * keyW - keyW * 0.35
@@ -148,8 +146,97 @@ function drawPiano(ctx: CanvasRenderingContext2D, x: number, y: number, size: nu
   ctx.restore()
 }
 
+function drawTrebleClef(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) {
+  ctx.save()
+  ctx.translate(x, y)
+  ctx.rotate((rotation * Math.PI) / 180)
+  const s = size / 18
+  ctx.scale(s, s)
+  ctx.strokeStyle = "rgba(201, 168, 76, 0.7)"
+  ctx.lineWidth = 1.5
+  ctx.fillStyle = "rgba(201, 168, 76, 0.3)"
+
+  // Simplified treble clef using bezier curves
+  ctx.beginPath()
+  // Bottom loop
+  ctx.moveTo(0, 12)
+  ctx.bezierCurveTo(-5, 12, -7, 8, -4, 5)
+  ctx.bezierCurveTo(-1, 2, 3, 3, 4, 6)
+  ctx.bezierCurveTo(6, 10, 2, 12, 0, 12)
+  ctx.fill()
+  ctx.stroke()
+
+  // Top spiral
+  ctx.beginPath()
+  ctx.moveTo(0, 12)
+  ctx.bezierCurveTo(1, 9, 5, 7, 6, 4)
+  ctx.bezierCurveTo(7, 0, 5, -4, 2, -5)
+  ctx.bezierCurveTo(-2, -6, -5, -3, -4, 1)
+  ctx.bezierCurveTo(-3, 3, 0, 4, 2, 2)
+  ctx.stroke()
+
+  // Vertical line through the clef
+  ctx.beginPath()
+  ctx.moveTo(2, -6)
+  ctx.lineTo(2, -14)
+  ctx.stroke()
+
+  // Small dot at bottom
+  ctx.beginPath()
+  ctx.arc(0, 14, 1, 0, Math.PI * 2)
+  ctx.fillStyle = "rgba(201, 168, 76, 0.7)"
+  ctx.fill()
+
+  ctx.restore()
+}
+
+function drawBassClef(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) {
+  ctx.save()
+  ctx.translate(x, y)
+  ctx.rotate((rotation * Math.PI) / 180)
+  const s = size / 16
+  ctx.scale(s, s)
+  ctx.strokeStyle = "rgba(201, 168, 76, 0.7)"
+  ctx.lineWidth = 1.5
+  ctx.fillStyle = "rgba(201, 168, 76, 0.3)"
+
+  // Main curved body
+  ctx.beginPath()
+  ctx.moveTo(4, -6)
+  ctx.bezierCurveTo(0, -6, -4, -2, -5, 3)
+  ctx.bezierCurveTo(-6, 9, -2, 13, 3, 13)
+  ctx.bezierCurveTo(7, 13, 9, 9, 7, 5)
+  ctx.bezierCurveTo(5, 1, 1, 0, 0, 3)
+  ctx.stroke()
+
+  // Fill body
+  ctx.beginPath()
+  ctx.moveTo(4, -6)
+  ctx.bezierCurveTo(0, -6, -4, -2, -5, 3)
+  ctx.bezierCurveTo(-6, 9, -2, 13, 3, 13)
+  ctx.bezierCurveTo(7, 13, 9, 9, 7, 5)
+  ctx.bezierCurveTo(5, 1, 1, 0, 0, 3)
+  ctx.lineTo(1, -2)
+  ctx.bezierCurveTo(3, -4, 5, -5, 4, -6)
+  ctx.closePath()
+  ctx.fill()
+  ctx.stroke()
+
+  // Two dots
+  ctx.beginPath()
+  ctx.arc(-8, 0, 1.2, 0, Math.PI * 2)
+  ctx.fillStyle = "rgba(201, 168, 76, 0.7)"
+  ctx.fill()
+
+  ctx.beginPath()
+  ctx.arc(-8, 7, 1.2, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.restore()
+}
+
 function initParticles(canvasW: number, canvasH: number, count: number): Particle[] {
-  const types: Particle["type"][] = ["heart", "ring", "petal", "diamond", "clarinet", "piano"]
+  const types: Particle["type"][] = ["heart", "ring", "petal", "diamond", "clarinet", "piano", "treble", "bass"]
   return Array.from({ length: count }, (_, i) => ({
     x: Math.random() * canvasW,
     y: Math.random() * canvasH,
@@ -158,12 +245,12 @@ function initParticles(canvasW: number, canvasH: number, count: number): Particl
     speedY: -0.2 - Math.random() * 0.6,
     rotation: Math.random() * 360,
     rotationSpeed: (Math.random() - 0.5) * 2,
-    opacity: 0.25 + Math.random() * 0.35,
-    type: types[i % 6],
+    opacity: 0.2 + Math.random() * 0.35,
+    type: types[i % 8],
   }))
 }
 
-export default function FloatingParticles({ count = 24 }: { count?: number }) {
+export default function FloatingParticles({ count = 32 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -215,6 +302,10 @@ export default function FloatingParticles({ count = 24 }: { count?: number }) {
           drawClarinet(ctx, p.x, p.y, p.size, p.rotation)
         } else if (p.type === "piano") {
           drawPiano(ctx, p.x, p.y, p.size, p.rotation)
+        } else if (p.type === "treble") {
+          drawTrebleClef(ctx, p.x, p.y, p.size, p.rotation)
+        } else if (p.type === "bass") {
+          drawBassClef(ctx, p.x, p.y, p.size, p.rotation)
         } else {
           ctx.fillStyle = "rgba(242, 213, 213, 0.55)"
           drawPetal(ctx, p.x, p.y, p.size, p.rotation)
