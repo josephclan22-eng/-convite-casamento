@@ -77,16 +77,38 @@ export default function Hero() {
         </svg>
       </div>
 
+      <div className="absolute top-1/3 left-6 sm:left-10 w-6 h-6 text-gold/25 animate-float-slow hidden sm:block" style={{ animationDelay: "1.5s" }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+          <rect x="4" y="2" width="16" height="20" rx="1" />
+          <line x1="8" y1="6" x2="8" y2="18" />
+          <line x1="10" y1="6" x2="10" y2="18" />
+          <line x1="12" y1="6" x2="12" y2="18" />
+          <line x1="14" y1="6" x2="14" y2="18" />
+          <line x1="16" y1="6" x2="16" y2="18" />
+          <rect x="8" y="6" width="8" height="4" fill="currentColor" fillOpacity="0.3" />
+        </svg>
+      </div>
+
+      <div className="absolute bottom-1/4 right-6 sm:right-16 w-8 h-16 text-gold/20 animate-float-slow hidden sm:block" style={{ animationDelay: "4s" }}>
+        <svg viewBox="0 0 8 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+          <rect x="2" y="0" width="4" height="18" rx="2" />
+          <path d="M1 18 Q0 21 4 24 Q8 21 7 18" />
+          <circle cx="4" cy="4" r="0.8" fill="currentColor" />
+          <circle cx="4" cy="8" r="0.8" fill="currentColor" />
+          <circle cx="4" cy="12" r="0.8" fill="currentColor" />
+        </svg>
+      </div>
+
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 16 }).map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-gold/50 rounded-full animate-diamond"
+            className="absolute w-1.5 h-1.5 bg-gold/60 rounded-full animate-diamond"
             style={{
-              left: `${10 + i * 11}%`,
-              top: `${8 + (i % 4) * 25}%`,
-              animationDelay: `${i * 0.6}s`,
-              animationDuration: `${2 + (i % 2)}s`,
+              left: `${5 + i * 6}%`,
+              top: `${5 + (i % 6) * 16}%`,
+              animationDelay: `${i * 0.4}s`,
+              animationDuration: `${1.5 + (i % 2) * 1.5}s`,
             }}
           />
         ))}
