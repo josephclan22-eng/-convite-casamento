@@ -9,7 +9,7 @@ interface Particle {
   rotation: number
   rotationSpeed: number
   opacity: number
-  type: "heart" | "ring" | "petal"
+  type: "heart" | "ring" | "petal" | "diamond"
 }
 
 function drawHeart(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) {
@@ -46,22 +46,36 @@ function drawPetal(ctx: CanvasRenderingContext2D, x: number, y: number, size: nu
   ctx.restore()
 }
 
+function drawDiamond(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) {
+  ctx.save()
+  ctx.translate(x, y)
+  ctx.rotate((rotation * Math.PI) / 180)
+  ctx.beginPath()
+  ctx.moveTo(0, -size / 2)
+  ctx.lineTo(size / 2, 0)
+  ctx.lineTo(0, size / 2)
+  ctx.lineTo(-size / 2, 0)
+  ctx.closePath()
+  ctx.stroke()
+  ctx.restore()
+}
+
 function initParticles(canvasW: number, canvasH: number, count: number): Particle[] {
-  const types: Particle["type"][] = ["heart", "ring", "petal"]
+  const types: Particle["type"][] = ["heart", "ring", "petal", "diamond"]
   return Array.from({ length: count }, (_, i) => ({
     x: Math.random() * canvasW,
     y: Math.random() * canvasH,
-    size: 8 + Math.random() * 16,
-    speedX: (Math.random() - 0.5) * 0.3,
-    speedY: -0.2 - Math.random() * 0.6,
+    size: 6 + Math.random() * 14,
+    speedX: (Math.random() - 0.5) * 0.25,
+    speedY: -0.15 - Math.random() * 0.5,
     rotation: Math.random() * 360,
-    rotationSpeed: (Math.random() - 0.5) * 2,
-    opacity: 0.35 + Math.random() * 0.4,
-    type: types[i % 3],
+    rotationSpeed: (Math.random() - 0.5) * 1.5,
+    opacity: 0.2 + Math.random() * 0.3,
+    type: types[i % 4],
   }))
 }
 
-export default function FloatingParticles({ count = 18 }: { count?: number }) {
+export default function FloatingParticles({ count = 16 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -98,17 +112,19 @@ export default function FloatingParticles({ count = 18 }: { count?: number }) {
 
         ctx.save()
         ctx.globalAlpha = p.opacity
-        ctx.strokeStyle = "rgba(201, 168, 76, 0.8)"
-        ctx.fillStyle = "rgba(201, 168, 76, 0.6)"
-        ctx.lineWidth = 2
+        ctx.strokeStyle = "rgba(201, 168, 76, 0.6)"
+        ctx.fillStyle = "rgba(201, 168, 76, 0.45)"
+        ctx.lineWidth = 1.5
 
         if (p.type === "heart") {
-          ctx.fillStyle = "rgba(201, 168, 76, 0.55)"
+          ctx.fillStyle = "rgba(201, 168, 76, 0.4)"
           drawHeart(ctx, p.x, p.y, p.size, p.rotation)
         } else if (p.type === "ring") {
           drawRing(ctx, p.x, p.y, p.size, p.rotation)
+        } else if (p.type === "diamond") {
+          drawDiamond(ctx, p.x, p.y, p.size, p.rotation)
         } else {
-          ctx.fillStyle = "rgba(242, 213, 213, 0.7)"
+          ctx.fillStyle = "rgba(242, 213, 213, 0.55)"
           drawPetal(ctx, p.x, p.y, p.size, p.rotation)
         }
 

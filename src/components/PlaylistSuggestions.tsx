@@ -2,11 +2,11 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 import DecorativeDivider from "./DecorativeDivider"
 
 const songs = [
-  { title: "Trem Bala", artist: "Ana Vilela", emoji: "🚂" },
-  { title: "Amei Te Ver", artist: "Tiago Iorc", emoji: "💛" },
-  { title: "Final de Tarde", artist: "César Menotti & Fabiano", emoji: "🌅" },
-  { title: "Deus Cuida de Mim", artist: "Kleber Lucas", emoji: "🙏" },
-  { title: "Nós Dois", artist: "Nando Reis", emoji: "🎵" },
+  { title: "Trem Bala", artist: "Ana Vilela" },
+  { title: "Amei Te Ver", artist: "Tiago Iorc" },
+  { title: "Final de Tarde", artist: "César Menotti & Fabiano" },
+  { title: "Deus Cuida de Mim", artist: "Kleber Lucas" },
+  { title: "Nós Dois", artist: "Nando Reis" },
 ]
 
 export default function PlaylistSuggestions() {
@@ -15,7 +15,7 @@ export default function PlaylistSuggestions() {
   return (
     <section className="py-24 md:py-32 px-6" ref={ref}>
       <div className="scroll-reveal max-w-2xl mx-auto text-center">
-        <DecorativeDivider variant="hearts" />
+        <DecorativeDivider variant="floral" />
 
         <p className="font-garamond text-gold-dark text-xl italic mb-3">
           Música
@@ -31,23 +31,27 @@ export default function PlaylistSuggestions() {
           {songs.map((song, i) => (
             <div
               key={i}
-              className="flex items-center gap-4 p-4 border border-gold/10 bg-cream/50 group hover:border-gold/30 transition-all duration-300 cursor-pointer"
+              className="flex items-center gap-4 p-4 border border-gold/10 bg-cream/50 group hover:border-gold/30 hover:bg-cream/80 transition-all duration-300 cursor-pointer"
             >
-              <span className="text-2xl">{song.emoji}</span>
+              <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center border border-gold/20 rounded-full group-hover:border-gold/50 transition-all">
+                <svg className="w-4 h-4 text-gold/60 group-hover:text-gold/80" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                </svg>
+              </div>
               <div className="flex-1 text-left">
                 <p className="font-serif text-lg text-ink group-hover:text-gold-dark transition-colors">
                   {song.title}
                 </p>
                 <p className="font-garamond text-muted italic text-sm">{song.artist}</p>
               </div>
-              <svg className="w-5 h-5 text-gold/60 group-hover:text-gold/80 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-              </svg>
+              <span className="font-sans text-[10px] text-muted/50 tracking-wider">
+                {String(i + 1).padStart(2, "0")}
+              </span>
             </div>
           ))}
         </div>
 
-        <DecorativeDivider variant="hearts" />
+        <DecorativeDivider variant="floral" />
       </div>
     </section>
   )

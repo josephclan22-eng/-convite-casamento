@@ -1,28 +1,26 @@
-import { useState } from "react"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 import DecorativeDivider from "./DecorativeDivider"
 
 const milestones = [
   {
     date: "O Primeiro Encontro",
-    icon: "✨",
+    desc: "O começo de tudo",
     text: "Dois olhares que se cruzaram e souberam que era o começo de algo eterno. O acaso os uniu, mas o destino os escolheu. Nunca mais foram os mesmos depois daquele dia.",
   },
   {
     date: "O Pedido",
-    icon: "💍",
+    desc: "Um momento inesquecível",
     text: "Em um momento que parecia parado no tempo, uma pergunta simples carregava o peso de uma vida inteira. O sim veio antes mesmo das palavras, nos olhos brilhando de felicidade.",
   },
   {
     date: "O Sim",
-    icon: "💛",
-    text: "No dia 6 de setembro de 2026, Elivaldo e Sara celebrarão não apenas o amor que sentem, mas a promessa de construir uma vida juntos, lado a lado, para sempre.",
+    desc: "06 de setembro de 2026",
+    text: "Elivaldo e Sara celebrarão não apenas o amor que sentem, mas a promessa de construir uma vida juntos, lado a lado, para sempre.",
   },
 ]
 
 export default function Story() {
   const ref = useScrollReveal()
-  const [expanded, setExpanded] = useState<number | null>(null)
 
   return (
     <section className="relative py-24 md:py-32 px-6 bg-gradient-to-b from-transparent via-rose-light/60 to-transparent" ref={ref}>
@@ -43,7 +41,7 @@ export default function Story() {
       </div>
 
       <div className="scroll-reveal max-w-3xl mx-auto relative z-10">
-        <DecorativeDivider variant="hearts" />
+        <DecorativeDivider variant="floral" />
 
         <p className="font-garamond text-gold-dark text-xl italic text-center mb-3">
           Nossa história
@@ -56,34 +54,36 @@ export default function Story() {
           {milestones.map((item, i) => (
             <div
               key={i}
-              className="relative pl-10 sm:pl-12 md:pl-20 border-l-2 border-gold/40 cursor-pointer group"
-              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="relative pl-10 sm:pl-12 md:pl-20 border-l border-gold/30 group"
             >
-              <div className="absolute left-0 top-0 -translate-x-1/2 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-gold/60 bg-cream flex items-center justify-center text-[10px] sm:text-sm group-hover:border-gold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gold/20">
-                {item.icon}
+              <div className="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full border-2 border-gold/50 bg-cream flex items-center justify-center group-hover:border-gold transition-all duration-500 group-hover:shadow-lg group-hover:shadow-gold/20">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-dark" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
               </div>
 
               <div className="pt-1 pb-4">
-                <span className="font-sans text-xs text-gold-dark tracking-[0.2em] uppercase">
+                <span className="font-sans text-[10px] sm:text-xs text-gold-dark tracking-[0.25em] uppercase">
                   {item.date}
                 </span>
-                <p className="font-garamond text-ink-light text-base sm:text-lg md:text-xl leading-relaxed mt-2 sm:mt-3 italic transition-all duration-300">
+                <span className="font-garamond text-muted text-sm italic ml-2">
+                  — {item.desc}
+                </span>
+                <p className="font-garamond text-ink-light text-base sm:text-lg md:text-xl leading-relaxed mt-3 italic">
                   "{item.text}"
                 </p>
-                {expanded === i && (
-                  <div className="mt-4 font-garamond text-muted text-base leading-relaxed animate-fade-in-up">
-                    "O amor verdadeiro não tem final feliz, porque o amor verdadeiro simplesmente não termina."
-                  </div>
-                )}
-                <span className="inline-block mt-3 font-sans text-[10px] text-gold/70 tracking-[0.1em] uppercase">
-                  {expanded === i ? "— Clique para recolher" : "— Clique para ler mais"}
-                </span>
               </div>
             </div>
           ))}
         </div>
 
-        <DecorativeDivider variant="hearts" />
+        <div className="mt-16 text-center">
+          <p className="font-script text-4xl md:text-5xl text-gold-dark/60">
+            &amp;
+          </p>
+        </div>
+
+        <DecorativeDivider variant="floral" />
       </div>
     </section>
   )

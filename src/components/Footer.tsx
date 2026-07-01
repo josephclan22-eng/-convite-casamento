@@ -12,8 +12,8 @@ export default function Footer() {
           </svg>
         </div>
 
-        <p className="font-serif text-2xl md:text-3xl text-ink mb-1">
-          Elivaldo <span className="text-gold font-light italic">&amp;</span> Sara
+        <p className="font-script text-3xl md:text-4xl text-ink mb-1">
+          Elivaldo <span className="font-script-alt text-gold-light text-2xl md:text-3xl">&amp;</span> Sara
         </p>
         <p className="font-garamond text-muted text-lg italic mb-4">
           Unidos pelo amor em 06.09.2026

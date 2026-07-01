@@ -7,6 +7,10 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center group">
       <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 flex items-center justify-center border border-gold/20 bg-cream/70 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/50 group-hover:shadow-lg group-hover:shadow-gold/5">
+        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-gold/40" />
+        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-gold/40" />
+        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-gold/40" />
+        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-gold/40" />
         <div className="flex gap-0.5 sm:gap-1 md:gap-1.5">
           {digits.map((d, i) => (
             <span
@@ -66,20 +70,20 @@ export default function Countdown() {
           <CountdownBlock value={time.seconds} label="Segundos" />
         </div>
 
-        <div className="mt-16 flex justify-center gap-4">
+        <div className="mt-10 sm:mt-16 flex justify-center gap-4">
           {Array.from({ length: 5 }).map((_, i) => (
             <span
               key={i}
-              className="block w-2 h-2 rounded-full bg-gold/50"
+              className="block w-2 h-2 rounded-full bg-gold/40"
               style={{ animation: `pulse-soft 2s ease-in-out ${i * 0.3}s infinite` }}
             />
           ))}
         </div>
 
-        <div className="mt-8 font-garamond text-muted text-base italic">
+        <div className="mt-6 sm:mt-8 font-garamond text-muted text-base italic">
           {time.days > 0
             ? `Faltam ${time.days} dias para o sim mais esperado`
-            : "Hoje é o grande dia! 💛"}
+            : "Hoje é o grande dia!"}
         </div>
       </div>
     </section>
