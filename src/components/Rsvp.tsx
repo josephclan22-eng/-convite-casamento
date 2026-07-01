@@ -42,7 +42,8 @@ export default function Rsvp() {
   }
 
   const handleDownload = async () => {
-    await downloadGuestList()
+    const ok = await downloadGuestList()
+    if (!ok) alert("Nenhum convidado cadastrado para download.")
   }
 
   const reset = () => {
@@ -88,7 +89,7 @@ export default function Rsvp() {
             Baixar Planilha de Convidados
           </button>
 
-          <div className="mt-12">
+          <div className="mt-12 flex flex-col items-center gap-4">
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); reset() }}
@@ -121,6 +122,18 @@ export default function Rsvp() {
         <p className="font-garamond text-ink-light text-lg leading-relaxed mb-8 max-w-lg mx-auto">
           Por favor, confirme até <strong className="text-gold-dark">15 de agosto de 2026</strong>
         </p>
+
+        <div className="mb-8 text-center">
+          <button
+            onClick={handleDownload}
+            className="inline-flex items-center gap-2 px-6 py-3 border border-gold/20 text-gold-dark font-sans text-[10px] tracking-[0.2em] uppercase transition-all duration-300 hover:bg-gold/10"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            Baixar Planilha de Convidados
+          </button>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 text-left animate-fade-in-up">
           <div>
