@@ -87,7 +87,7 @@ export default function Details() {
             <p className="font-garamond text-ink-light text-base sm:text-lg mb-1 group-hover:text-gold-dark transition-colors">
               Espaço Absolutto
             </p>
-            <p className="font-garamond text-muted text-sm sm:text-base italic">Festas e Eventos — Jardin Ingá — Traje: Esporte Fino</p>
+            <p className="font-garamond text-muted text-sm sm:text-base italic">Festas e Eventos — Jardin Ingá</p>
           </a>
         </div>
 
