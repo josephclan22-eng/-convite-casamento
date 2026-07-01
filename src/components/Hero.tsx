@@ -117,7 +117,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-4xl">
         <div className="animate-fade-in-down">
           <OrnamentTop />
-          <p className="font-sans text-[10px] md:text-xs text-gold-dark/70 tracking-[0.35em] uppercase mb-6">
+          <p className="font-sans text-sm md:text-lg text-gold-dark/70 tracking-[0.35em] uppercase mb-6">
             Convite para o Casamento
           </p>
         </div>
